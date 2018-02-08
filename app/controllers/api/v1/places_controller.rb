@@ -4,25 +4,21 @@ require 'json'
 
 class Api::V1::PlacesController < ApplicationController
   def get_places
-    url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
-
-    # key = params[:key]
-    # location = params[:location]
-    # radius = paramas[:radius]
-    # type = params[:type]
+    base_url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
 
     key = '?key=AIzaSyB49_gdZLhh1aovYeIFv9c8CS7Xt-Wxg4M'
+    type = "&type=#{params[:type]}"
+    radius = "&radius=#{params[:radius]}"
     location = '&location=40.7052569,-74.0162643'
-    radius = '&radius=100'
-    type = '&type=restaurant'
 
-    final_url = "#{url + key + location + radius + type}"
-
+    final_url = "#{base_url + key + location + type + radius}"
 
     uri = URI.parse(final_url)
     response = Net::HTTP.get_response(uri)
     response.body
     result = JSON.parse(response.body)
+
+    # print params
 
     render json: {locations: result}
   end
