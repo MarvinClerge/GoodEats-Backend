@@ -9,7 +9,8 @@ class Api::V1::PlacesController < ApplicationController
     key = '?key=AIzaSyB49_gdZLhh1aovYeIFv9c8CS7Xt-Wxg4M'
     type = "&type=#{params[:type]}"
     radius = "&radius=#{params[:radius]}"
-    location = '&location=40.7052569,-74.0162643'
+    location = "&location=#{params[:location]}"
+    # location = '&location=40.7052569,-74.0162643'
 
     final_url = "#{base_url + key + location + type + radius}"
 
@@ -18,7 +19,6 @@ class Api::V1::PlacesController < ApplicationController
     response.body
     result = JSON.parse(response.body)
 
-    # print params
 
     render json: {locations: result}
   end
@@ -27,10 +27,12 @@ class Api::V1::PlacesController < ApplicationController
     url = 'https://maps.googleapis.com/maps/api/place/details/json'
 
     # key = params[:key]
-    # placeId = params[:placeId]
+    place_id = "&place_id=#{params[:place_id]}"
+
+    # print params
 
     key = '?key=AIzaSyB49_gdZLhh1aovYeIFv9c8CS7Xt-Wxg4M'
-    place_id = '&placeid=ChIJjUw7LxJawokRByGsMS3I1Xc'
+    # place_id = '&placeid=ChIJjUw7LxJawokRByGsMS3I1Xc'
 
     final_url = "#{url + key + place_id}"
 

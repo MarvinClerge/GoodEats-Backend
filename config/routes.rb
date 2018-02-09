@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get '/places', to: 'places#get_places'
-      get '/places/x', to: 'places#get_place'
+      get '/places/:place_id', to: 'places#get_place'
     end
   end
 
