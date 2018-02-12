@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/places', to: 'places#get_places'
       get '/places/:place_id', to: 'places#get_place'
+      get '/pictures/:picture_id', to: 'places#get_picture'
     end
   end
 
