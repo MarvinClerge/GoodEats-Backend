@@ -7,7 +7,8 @@ Rails.application.routes.draw do
       get '/places/:place_id', to: 'places#get_place'
       get '/pictures/:picture_id', to: 'places#get_picture'
 
-      post 'users', to: 'users#create'
+      post '/signup', to: 'users#signup'
+      post '/login', to: 'users#login'
     end
   end
 
