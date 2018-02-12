@@ -2,11 +2,15 @@ require 'net/http'
 require 'open-uri'
 require 'json'
 
+# Marvin AIzaSyDXX--6ZEOR4jUxhmS6qbuVxgfKouP8Xmk
+# Matt AIzaSyAUtkYCeGodhngmVM40Yo8PxDDlgU6mrfo
+
+
 class Api::V1::PlacesController < ApplicationController
   def get_places
     base_url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
 
-    key = '?key=AIzaSyB8Jg0gTB-KAwT5VeHkUg_ZlmisRAk0pqI'
+    key = '?key=AIzaSyAUtkYCeGodhngmVM40Yo8PxDDlgU6mrfo'
     type = "&type=#{params[:type]}"
     radius = "&radius=#{params[:radius]}"
     location = "&location=#{params[:location]}"
@@ -27,7 +31,7 @@ class Api::V1::PlacesController < ApplicationController
     url = 'https://maps.googleapis.com/maps/api/place/details/json'
 
     place_id = "&place_id=#{params[:place_id]}"
-    key = '?key=AIzaSyB8Jg0gTB-KAwT5VeHkUg_ZlmisRAk0pqI'
+    key = '?key=AIzaSyAUtkYCeGodhngmVM40Yo8PxDDlgU6mrfo'
 
     final_url = "#{url + key + place_id}"
 
@@ -42,7 +46,7 @@ class Api::V1::PlacesController < ApplicationController
   def get_picture
     url = 'https://maps.googleapis.com/maps/api/place/photo'
 
-    key = '?key=AIzaSyB8Jg0gTB-KAwT5VeHkUg_ZlmisRAk0pqI'
+    key = '?key=AIzaSyAUtkYCeGodhngmVM40Yo8PxDDlgU6mrfo'
     picture_id = "&photoreference=#{params[:picture_id]}"
     # 1280 x 720
 

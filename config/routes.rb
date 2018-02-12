@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       get '/places', to: 'places#get_places'
       get '/places/:place_id', to: 'places#get_place'
       get '/pictures/:picture_id', to: 'places#get_picture'
+
+      post 'users', to: 'users#create'
     end
   end
 
