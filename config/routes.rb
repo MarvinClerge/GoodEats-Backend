@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       post '/signup', to: 'users#signup'
       post '/login', to: 'users#login'
       get '/currentuser', to: 'users#find_current_user'
+
+      delete '/removefavorite', to: 'favorites#remove_favorite'
+      post '/addfavorite', to: 'favorites#add_favorite'
     end
   end
 
