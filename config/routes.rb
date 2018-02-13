@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
       post '/signup', to: 'users#signup'
       post '/login', to: 'users#login'
+      get '/currentuser', to: 'users#find_current_user'
     end
   end
 

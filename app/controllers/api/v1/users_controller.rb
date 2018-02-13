@@ -10,12 +10,24 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def login
-    @user = User.find_by(username: params[:username])
+    u = User.find_by(username: params[:username])
 
-    if @user && @user.authenticate(params[:password])
-      render json: {id: @user.id, username: @user.username, token: encode_token({'user_id': @user.id})}
+    # if @user && @user.authenticate(params[:password])
+    #   render json: {id: @user.id, username: @user.username, token: encode_token({'user_id': @user.id})}
+    if u && u.authenticate(params[:password])
+      token = issue_token({ 'user_id': u.id })
+      render json: {id: u.id, 'token': token }
     else
       render json: {error: "Username and password do not match"}, status: 401
+    end
+  end
+
+  def find_current_user
+    u = current_user
+    if u
+      render json: {username: u.username, favorites: u.favorites}
+    else
+      render json: {error: 'User Not Found'}, status: 401
     end
   end
 
