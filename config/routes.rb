@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
       delete '/removefavorite', to: 'favorites#remove_favorite'
       post '/addfavorite', to: 'favorites#add_favorite'
+
+      get '/comments', to: 'comments#show'
     end
   end
 
