@@ -14,15 +14,11 @@ class Api::V1::FavoritesController < ApplicationController
     @user = User.find(params[:userId])
     @favorite = Favorite.find_by(place_id: params[:placeId], user: @user)
 
-    @favorite.destroy
-
-    if @favorite
-      render json: {error: 'Unable to Find Favorite'}
+    if @favorite.destroy
+      render json: {message: 'Favorite Removed'}
     else
-      render json: {success: 'Favorite Removed'}
+      render json: {error: 'Could not delete favorite'}
     end
   end
 
 end
-
-# User.first.favorites.map {|favorite| favorite.place_id }
