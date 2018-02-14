@@ -1,7 +1,11 @@
 class Api::V1::CommentsController < ApplicationController
   def show
     @comments = Comment.where(["place_id = ?", params[:placeId]])
-    # @comments = Comment.all.select{|comment| comment.place_id == params[:placeId]}
+    @comments = @comments.sort_by{|comment| comment.created_at}.reverse
+
+    @comments = @comments.map do |comment|
+      comment = {comment: comment, username: comment.user.username, user_id: comment.user.id}
+    end
 
     render json: {comments: @comments}
   end
