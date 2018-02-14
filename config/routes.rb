@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get '/comments', to: 'comments#show'
       post '/comments', to: 'comments#create'
       patch '/comments', to: 'comments#update'
+      delete '/comments', to: 'comments#destroy'
     end
   end
 
