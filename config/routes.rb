@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      post '/users', to: 'users#create'
+
       get '/places', to: 'places#get_places'
       get '/places/:place_id', to: 'places#get_place'
       get '/pictures/:picture_id', to: 'places#get_picture'

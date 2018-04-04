@@ -1,11 +1,12 @@
 class Api::V1::UsersController < ApplicationController
-  def signup
-    @user = User.new(username: params[:username], password: params[:password])
+  def create
+    @user = User.new(user_params)
 
-    if @user.save
-      render json: {user: @user}
+    if @user.valid?
+      # @user.save
+      render json: @user
     else
-      render json: {error: "Invalid Entry"}, status: 401
+      render json: {errors: @user.errors}, status: 401
     end
   end
 
@@ -32,6 +33,12 @@ class Api::V1::UsersController < ApplicationController
     else
       render json: {error: 'User Not Found'}, status: 401
     end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:username, :password, :password_confirmation)
   end
 
 end
