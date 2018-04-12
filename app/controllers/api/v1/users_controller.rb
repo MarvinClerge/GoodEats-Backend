@@ -4,24 +4,21 @@ class Api::V1::UsersController < ApplicationController
 
     if @user.valid?
       # @user.save
-      render json: @user
+      token = issue_token({ 'user_id': @user.id })
+      render json: {user: @user, token: token}
     else
-      render json: {errors: @user.errors}, status: 401
+      render json: @user.errors, status: 401
     end
   end
 
   def login
-    u = User.find_by(username: params[:username])
+    @user = User.find_by(username: user_params[:username])
 
-    # if @user && @user.authenticate(params[:password])
-    #   render json: {id: @user.id, username: @user.username, token: encode_token({'user_id': @user.id})}
-    if u && u.authenticate(params[:password])
-      favorites = u.favorites.map {|favorite| favorite.place_id}
-      token = issue_token({ 'user_id': u.id })
-
-      render json: {user: u, favorites: favorites, 'token': token}
+    if @user && @user.authenticate(user_params[:password])
+      token = issue_token({ 'user_id': @user.id })
+      render json: {user: @user, token: token}
     else
-      render json: {error: "Username and password do not match"}, status: 401
+      render json: {error: 'Username and password do not match'}, status: 401
     end
   end
 
